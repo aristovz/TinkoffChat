@@ -82,8 +82,8 @@
 				2FCAD1451E6D842B009E3D08 /* AppDelegate.swift */,
 				2FCAD1471E6D842B009E3D08 /* ViewController.swift */,
 				2FCAD1491E6D842B009E3D08 /* Main.storyboard */,
-				2FCAD14F1E6D842B009E3D08 /* Assets.xcassets */,
 				2FCAD1511E6D842B009E3D08 /* LaunchScreen.storyboard */,
+				2FCAD14F1E6D842B009E3D08 /* Assets.xcassets */,
 				2FCAD1541E6D842B009E3D08 /* Info.plist */,
 				2FCAD14C1E6D842B009E3D08 /* TinkoffChat.xcdatamodeld */,
 			);
