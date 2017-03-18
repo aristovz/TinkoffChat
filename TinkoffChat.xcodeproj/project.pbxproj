@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F277ACA1E7CA2AA00ED00B8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F277AC91E7CA2AA00ED00B8 /* Extensions.swift */; };
 		2FCAD1461E6D842B009E3D08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCAD1451E6D842B009E3D08 /* AppDelegate.swift */; };
 		2FCAD1481E6D842B009E3D08 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCAD1471E6D842B009E3D08 /* ViewController.swift */; };
 		2FCAD14B1E6D842B009E3D08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCAD1491E6D842B009E3D08 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F277AC91E7CA2AA00ED00B8 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2FCAD1421E6D842B009E3D08 /* TinkoffChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCAD1451E6D842B009E3D08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FCAD1471E6D842B009E3D08 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +60,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F277AC81E7CA29300ED00B8 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				2F277AC91E7CA2AA00ED00B8 /* Extensions.swift */,
+			);
+			name = Support;
+			sourceTree = "<group>";
+		};
 		2FCAD1391E6D842B009E3D08 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +89,7 @@
 		2FCAD1441E6D842B009E3D08 /* TinkoffChat */ = {
 			isa = PBXGroup;
 			children = (
+				2F277AC81E7CA29300ED00B8 /* Support */,
 				2FCAD1451E6D842B009E3D08 /* AppDelegate.swift */,
 				2FCAD1471E6D842B009E3D08 /* ViewController.swift */,
 				2FCAD1491E6D842B009E3D08 /* Main.storyboard */,
@@ -149,7 +160,7 @@
 				TargetAttributes = {
 					2FCAD1411E6D842B009E3D08 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = DSX6W75YR7;
+						DevelopmentTeam = Z76ZV82BGX;
 						ProvisioningStyle = Automatic;
 					};
 					2FCAD1581E6D842C009E3D08 = {
@@ -207,6 +218,7 @@
 				2FCAD1481E6D842B009E3D08 /* ViewController.swift in Sources */,
 				2FCAD1461E6D842B009E3D08 /* AppDelegate.swift in Sources */,
 				2FCAD14E1E6D842B009E3D08 /* TinkoffChat.xcdatamodeld in Sources */,
+				2F277ACA1E7CA2AA00ED00B8 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,10 +355,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = DSX6W75YR7;
+				DEVELOPMENT_TEAM = Z76ZV82BGX;
 				INFOPLIST_FILE = TinkoffChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ru.aristovz.TinkoffChat;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.aristovz.TinkoffChat1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -356,10 +368,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = DSX6W75YR7;
+				DEVELOPMENT_TEAM = Z76ZV82BGX;
 				INFOPLIST_FILE = TinkoffChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ru.aristovz.TinkoffChat;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.aristovz.TinkoffChat1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -414,6 +426,7 @@
 				2FCAD1641E6D842C009E3D08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2FCAD1651E6D842C009E3D08 /* Build configuration list for PBXNativeTarget "TinkoffChatTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +435,7 @@
 				2FCAD1671E6D842C009E3D08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
