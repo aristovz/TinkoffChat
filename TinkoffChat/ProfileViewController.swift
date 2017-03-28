@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ProfileViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var colorTextLabel: UILabel!
     
@@ -29,17 +29,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         imagePicker.delegate = self
         
-        _ = colorButtonsOutlet.map { $0.layer.cornerRadius = $0.frame.width / 2 }
-        
-        avatarImageView.layer.masksToBounds = true
-        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
-        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectPhoto))
         avatarImageView.isUserInteractionEnabled = true
         avatarImageView.addGestureRecognizer(tapGestureRecognizer)
         
-        print("\n\n - \(#function)")
-        _ = self.view.subviews.map { print($0) }
+//        print("\n\n - \(#function)")
+//        self.view.subviews.forEach { print($0) }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        colorButtonsOutlet.forEach { $0.layer.cornerRadius = $0.frame.width / 2 }
+        
+        avatarImageView.layer.masksToBounds = true
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
+        
+//        print("\n\n - \(#function)")
+//        self.view.subviews.forEach { print($0) }
     }
     
     func selectPhoto() {
@@ -97,23 +102,31 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     // - MARK: UITextFieldDelegate Methods
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
     
     // - MARK: ViewControllerButtonActions
+    
     @IBAction func saveButtonAction(_ sender: UIButton) {
         print("This scene should be saved")
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func colorButtonsAction(_ sender: UIButton) {
         colorTextLabel.textColor = sender.backgroundColor
     }
+    
+    @IBAction func cancelButtonAction(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 // - MARK: UIImagePickerControllerDelegate Methods
-extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             avatarImageView.image = pickedImage
@@ -124,34 +137,30 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
 }
 
 // - MARK: Print LifeCycle info
-extension ViewController {
-    override func viewDidLayoutSubviews() {
-        print("\n\n - \(#function)")
-        _ = self.view.subviews.map { print($0) }
-    }
-    
-    override func viewWillLayoutSubviews() {
-        print("\n\n - \(#function)")
-        _ = self.view.subviews.map { print($0) }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        print("\n\n - \(#function)")
-        _ = self.view.subviews.map { print($0) }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        print("\n\n - \(#function)")
-        _ = self.view.subviews.map { print($0) }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        print("\n\n - \(#function)")
-        _ = self.view.subviews.map { print($0) }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        print("\n\n - \(#function)")
-        _ = self.view.subviews.map { print($0) }
-    }
-}
+
+//extension ViewController {
+//    override func viewWillLayoutSubviews() {
+//        print("\n\n - \(#function)")
+//        self.view.subviews.forEach { print($0) }
+//    }
+//    
+//    override func viewDidAppear(_ animated: Bool) {
+//        print("\n\n - \(#function)")
+//        self.view.subviews.forEach { print($0) }
+//    }
+//    
+//    override func viewWillAppear(_ animated: Bool) {
+//        print("\n\n - \(#function)")
+//        self.view.subviews.forEach { print($0) }
+//    }
+//    
+//    override func viewDidDisappear(_ animated: Bool) {
+//        print("\n\n - \(#function)")
+//        self.view.subviews.forEach { print($0) }
+//    }
+//    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        print("\n\n - \(#function)")
+//        self.view.subviews.forEach { print($0) }
+//    }
+//}
