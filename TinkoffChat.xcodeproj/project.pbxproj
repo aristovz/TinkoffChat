@@ -85,7 +85,7 @@
 		2F3E2F791E8ADEB200DF02E8 /* ConversationListViewController */ = {
 			isa = PBXGroup;
 			children = (
-				2F7F662E1E8585CB00CBBDDF /* MessageCell */,
+				2F7F662E1E8585CB00CBBDDF /* DialogCell */,
 				2F7F662C1E8574AC00CBBDDF /* ConversationsListViewController.swift */,
 			);
 			name = ConversationListViewController;
@@ -110,13 +110,13 @@
 			name = ConversationViewController;
 			sourceTree = "<group>";
 		};
-		2F7F662E1E8585CB00CBBDDF /* MessageCell */ = {
+		2F7F662E1E8585CB00CBBDDF /* DialogCell */ = {
 			isa = PBXGroup;
 			children = (
 				2F7F662F1E8585EB00CBBDDF /* DialogCell.swift */,
 				2F7F66301E8585EB00CBBDDF /* DialogCell.xib */,
 			);
-			name = MessageCell;
+			name = DialogCell;
 			sourceTree = "<group>";
 		};
 		2FCAD1391E6D842B009E3D08 = {

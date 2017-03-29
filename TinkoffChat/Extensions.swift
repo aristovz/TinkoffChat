@@ -9,6 +9,29 @@
 import Foundation
 import UIKit
 
+extension UITableView {
+    func scrollToLastRow(animated: Bool = true) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+            let numberOfSections = self.numberOfSections
+            let numberOfRows = self.numberOfRows(inSection: numberOfSections - 1)
+            if numberOfRows > 0 {
+                let indexPath = IndexPath(row: numberOfRows-1, section: (numberOfSections - 1))
+                self.scrollToRow(at: indexPath, at: .bottom, animated: animated)
+            }
+        }
+    }
+}
+
+extension UIRefreshControl {
+    func beginRefreshingManually() {
+        if let scrollView = superview as? UIScrollView {
+            scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentOffset.y - frame.height), animated: false)
+        }
+        beginRefreshing()
+        sendActions(for: .valueChanged)
+    }
+}
+
 extension UIViewController {
     func showWarningAlert(text: String) {
         let alertWarning = UIAlertController(title: "Внимание", message: text, preferredStyle: .alert)

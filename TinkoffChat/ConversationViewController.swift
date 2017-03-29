@@ -14,19 +14,42 @@ class ConversationViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var currentDialog: Dialog? {
+        didSet {
+            navigationItem.title = currentDialog?.name
+        }
+    }
+    
+    let noMessageLabel: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
+        
+        label.textAlignment = .center
+        label.textColor = .lightGray
+        label.font = label.font.withSize(12)
+        label.text = "Нет сообщений"
+        
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem?.title = ""
+        
+        hideKeyboardWhenTappedAround()
+        
         tableView.register(UINib(nibName: "IncomingMessageCell", bundle: nil) , forCellReuseIdentifier: "incomingCell")
         tableView.register(UINib(nibName: "OutgoingMessageCell", bundle: nil) , forCellReuseIdentifier: "outgoingCell")
-
-        hideKeyboardWhenTappedAround()
-
+        
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        if currentDialog?.messages?.count == 0 { self.tableView.addSubview(noMessageLabel) }
+        
+        tableView.scrollToLastRow()
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
@@ -34,45 +57,50 @@ class ConversationViewController: UIViewController {
     }
     
     func handleKeyboardNotification(_ notification: Notification) {
-        
         if let userInfo = notification.userInfo {
             let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
             let isKeyboardShowing = notification.name == NSNotification.Name.UIKeyboardWillShow
             
-            bottomConstraint.constant = isKeyboardShowing ? -keyboardFrame!.height : 0
+            bottomConstraint.constant = isKeyboardShowing ? keyboardFrame!.height : 0
             
             UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                self.view.layoutIfNeeded()
+                self.view.layoutSubviews()
             }, completion: { (completed) in
                 if isKeyboardShowing {
-                    self.scrollToLastRow()
+                    self.tableView.scrollToLastRow()
                 }
             })
         }
     }
-
-    func scrollToLastRow() {
-        let lastSectionIndex = self.tableView.numberOfSections - 1
-        let lastRowIndex = self.tableView.numberOfRows(inSection: lastSectionIndex) - 1
-        let pathToLastRow = IndexPath(row: lastRowIndex, section: lastSectionIndex)
-        self.tableView.scrollToRow(at: pathToLastRow, at: .bottom, animated: true)
-    }
 }
 
 extension ConversationViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let identefier = indexPath.row % 2 == 0 ? "incomingCell" : "outgoingCell"
-        
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: identefier) as! MessageCell
-        return cell
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if let messagesCount = currentDialog?.messages?.count {
+            return messagesCount
+        }
+        
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let currentMessage = currentDialog?.messages?[indexPath.row] {
+            let identefier = currentMessage.type == .Incoming ? "incomingCell" : "outgoingCell"
+            
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: identefier) as! MessageCell
+            cell.messageText = currentMessage.text
+            cell.date = currentMessage.date
+            
+            return cell
+        }
+        else {
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "incomingCell") as! MessageCell
+            cell.messageText = "Error"
+            return cell
+        }
     }
 }

@@ -26,6 +26,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tinkoff Chat" id="mdD-cy-3A0">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="DtY-41-5nn"/>
                         <barButtonItem key="rightBarButtonItem" style="done" id="1Mr-tR-1yn">
                             <view key="customView" contentMode="scaleToFill" id="UEr-fS-LF7">
                                 <rect key="frame" x="364" y="7" width="30" height="30"/>
@@ -40,6 +41,10 @@
                             </view>
                         </barButtonItem>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="xVn-Fe-a3g">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                     <connections>
                         <outlet property="avatarImageView" destination="V4T-cK-rOH" id="iS6-7X-Z1x"/>
                     </connections>
@@ -52,11 +57,12 @@
         <scene sceneID="ZuH-Ey-bQo">
             <objects>
                 <navigationController id="hBR-9C-GTp" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="sHK-ok-etH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="sHK-ok-etH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.1979264758" green="0.21941452410000001" blue="0.27655480180000003" alpha="0.83366331339999999" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.19607843137254902" green="0.2196078431372549" blue="0.27843137254901962" alpha="0.83366331339999999" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
                     </navigationBar>
@@ -285,12 +291,12 @@
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dWE-6Q-iao">
                                         <rect key="frame" x="49" y="7" width="287" height="30"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardAppearance="alert" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
-                                            <outlet property="delegate" destination="yeI-fj-rrg" id="UD5-u9-Tmb"/>
+                                            <outlet property="delegate" destination="yeI-fj-rrg" id="0ht-nx-P8c"/>
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="shR-LV-5Tx">
@@ -312,7 +318,7 @@
                                         <state key="normal" image="camera"/>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.19607843137254902" green="0.2196078431372549" blue="0.27843137254901962" alpha="0.82999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="kyy-iD-kU7" firstAttribute="centerY" secondItem="B9M-tY-WpJ" secondAttribute="centerY" id="ARx-8W-VgH"/>
                                     <constraint firstAttribute="bottom" secondItem="shR-LV-5Tx" secondAttribute="bottom" id="EKV-sZ-n2g"/>
@@ -325,7 +331,7 @@
                                     <constraint firstItem="kyy-iD-kU7" firstAttribute="leading" secondItem="B9M-tY-WpJ" secondAttribute="leading" constant="12" id="zxZ-Zu-CUd"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Qv-mP-uxv">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Qv-mP-uxv">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -343,7 +349,7 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
-                        <outlet property="bottomConstraint" destination="EKV-sZ-n2g" id="KZV-AM-L6F"/>
+                        <outlet property="bottomConstraint" destination="aVe-sy-gIR" id="IEs-gT-zqw"/>
                         <outlet property="tableView" destination="5Qv-mP-uxv" id="n3m-cJ-HSF"/>
                     </connections>
                 </viewController>

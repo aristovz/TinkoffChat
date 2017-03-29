@@ -21,6 +21,10 @@ class DialogCell: UITableViewCell, ConversationsCellConfiguration {
 
     private let formatter = DateFormatter()
     
+    let standartFont = UIFont(name: "Helvetica Neue", size: 17)
+    let mediumFont = UIFont(name: "HelveticaNeue-Medium", size: 17)
+    let noMessageFont = UIFont(name: "HelveticaNeue-Italic", size: 17)
+    
     var name: String? {
         get { return nameLabel.text }
         set { nameLabel.text = newValue }
@@ -30,11 +34,11 @@ class DialogCell: UITableViewCell, ConversationsCellConfiguration {
         get { return messageLabel.text }
         set {
             if let newMessage = newValue {
-                messageLabel.font = UIFont(name: "Helvetica Neue", size: 17)
+                messageLabel.font = standartFont
                 messageLabel.text = newMessage
             }
             else {
-                messageLabel.font = UIFont(name: "Optima", size: 17)
+                messageLabel.font = noMessageFont
                 messageLabel.text = "No messages yet"
             }
         }
@@ -53,6 +57,7 @@ class DialogCell: UITableViewCell, ConversationsCellConfiguration {
                 
                 dateLabel.text = formatter.string(from: newDate)
             }
+            else { dateLabel.text = "" }
         }
     }
     
@@ -70,7 +75,7 @@ class DialogCell: UITableViewCell, ConversationsCellConfiguration {
         set {
             _hasUnreadMessage = newValue
             indicatorWidthConstraint.constant = newValue ? 20 : 0
-            messageLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 17)
+            messageLabel.font = newValue ? mediumFont : messageLabel.font
         }
     }
 }
