@@ -66,6 +66,7 @@ class DialogCell: UITableViewCell, ConversationsCellConfiguration {
         set {
             _online = newValue
             self.backgroundColor = newValue ? .backgroundOnlineCell : .backgroundOfflineCell
+            nameLabel.textColor = newValue ? .darkText : .darkGray
             nameLabel.textColor = newValue ? .darkGray : .gray
         }
     }

@@ -19,6 +19,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var avatarImageView: UIImageView!
     
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    
     let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
@@ -32,9 +34,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectPhoto))
         avatarImageView.isUserInteractionEnabled = true
         avatarImageView.addGestureRecognizer(tapGestureRecognizer)
-        
-//        print("\n\n - \(#function)")
-//        self.view.subviews.forEach { print($0) }
     }
     
     override func viewDidLayoutSubviews() {
@@ -42,9 +41,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         
         avatarImageView.layer.masksToBounds = true
         avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
-        
-//        print("\n\n - \(#function)")
-//        self.view.subviews.forEach { print($0) }
     }
     
     func selectPhoto() {
@@ -101,6 +97,15 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         self.present(alert, animated: true, completion: nil)
     }
 
+    func showSuccessAlert() {
+        let successAlert = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
+        present(successAlert, animated: true, completion: nil)
+    }
+    
+    func showErrorAlert() {
+        
+    }
+    
     // - MARK: UITextFieldDelegate Methods
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -109,9 +114,25 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     // - MARK: ViewControllerButtonActions
+    @IBAction func GCDsaveButtonAction(_ sender: UIButton) {
+        let title = sender.titleLabel?.text
+        sender.setTitle("", for: .normal)
+        loadingIndicator.center = sender.center
+        loadingIndicator.startAnimating()
+        showSuccessAlert()
+        loadingIndicator.stopAnimating()
+        sender.setTitle(title, for: .normal)
+        //dismiss(animated: true, completion: nil)
+    }
     
-    @IBAction func saveButtonAction(_ sender: UIButton) {
-        print("This scene should be saved")
+    @IBAction func operationSaveButtonAction(_ sender: UIButton) {
+        let title = sender.titleLabel?.text
+        sender.setTitle("", for: .normal)
+        loadingIndicator.center = sender.center
+        loadingIndicator.startAnimating()
+        showErrorAlert()
+        loadingIndicator.stopAnimating()
+        sender.setTitle(title, for: .normal)
         dismiss(animated: true, completion: nil)
     }
     
@@ -135,32 +156,3 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         dismiss(animated: true, completion: nil)
     }
 }
-
-// - MARK: Print LifeCycle info
-
-//extension ViewController {
-//    override func viewWillLayoutSubviews() {
-//        print("\n\n - \(#function)")
-//        self.view.subviews.forEach { print($0) }
-//    }
-//    
-//    override func viewDidAppear(_ animated: Bool) {
-//        print("\n\n - \(#function)")
-//        self.view.subviews.forEach { print($0) }
-//    }
-//    
-//    override func viewWillAppear(_ animated: Bool) {
-//        print("\n\n - \(#function)")
-//        self.view.subviews.forEach { print($0) }
-//    }
-//    
-//    override func viewDidDisappear(_ animated: Bool) {
-//        print("\n\n - \(#function)")
-//        self.view.subviews.forEach { print($0) }
-//    }
-//    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        print("\n\n - \(#function)")
-//        self.view.subviews.forEach { print($0) }
-//    }
-//}

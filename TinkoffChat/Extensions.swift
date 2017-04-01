@@ -35,6 +35,13 @@ extension UIRefreshControl {
 extension UIViewController {
     func showWarningAlert(text: String) {
         let alertWarning = UIAlertController(title: "Внимание", message: text, preferredStyle: .alert)
+        
+        let dismisAction = UIAlertAction(title: "Да", style: .default) {
+            (alert: UIAlertAction!) -> Void in
+            
+            self.avatarImageView.image = #imageLiteral(resourceName: "defaultUser")
+        }
+        
         present(alertWarning, animated: true, completion: nil)
     }
     
