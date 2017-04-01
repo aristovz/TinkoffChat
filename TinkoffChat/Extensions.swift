@@ -38,10 +38,10 @@ extension UIViewController {
         
         let dismisAction = UIAlertAction(title: "Да", style: .default) {
             (alert: UIAlertAction!) -> Void in
-            
-            self.avatarImageView.image = #imageLiteral(resourceName: "defaultUser")
+            self.dismiss(animated: true, completion: nil)
         }
         
+        alertWarning.addAction(dismisAction)
         present(alertWarning, animated: true, completion: nil)
     }
     
