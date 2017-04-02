@@ -48,7 +48,7 @@ extension UIViewController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-    }
+    } 
     
     func addDoneButtonToTextInputsViews(views: [UIView], toolBarStyle: UIBarStyle = .blackTranslucent, buttonColor: UIColor = .yellow) {
         let toolBar = UIToolbar()
