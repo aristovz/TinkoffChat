@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "ConversationViewController.scrollToLastRow() -&gt; ():ConversationViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MessageCell.messageText.setter:MessageCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "messageLabel">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ConversationViewController.handleKeyboardNotification(Notification) -&gt; ():ConversationViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "bottomConstraint.constant">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ConversationViewController.viewDidLoad() -&gt; ():ConversationViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "navigationController">
+            </PersistentString>
+            <PersistentString
+               value = "navigationController?.navigationBar.topItem?.backBarButtonItem.title">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ConversationsListViewController.setupData() -&gt; ():ConversationsListViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "onlineDialogs">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ConversationViewController.currentDialog.didset:ConversationViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tableView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
