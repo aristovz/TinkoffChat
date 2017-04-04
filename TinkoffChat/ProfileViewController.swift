@@ -21,6 +21,10 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var GCDSaveButtonOutlet: UIButton!
+    
+    @IBOutlet weak var OperationSaveButtonOutlet: UIButton!
+    
     let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
@@ -34,6 +38,15 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectPhoto))
         avatarImageView.isUserInteractionEnabled = true
         avatarImageView.addGestureRecognizer(tapGestureRecognizer)
+        
+        GCDDataManager.sharedInstance.loadData { (currentUser) in
+            guard let user = currentUser else { return }
+            
+            self.loginTextField.text = user.name
+            self.userInfoTextView.text = user.about
+            self.avatarImageView.image = user.image
+            self.colorTextLabel.textColor = user.color
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -99,11 +112,27 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
 
     func showSuccessAlert() {
         let successAlert = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        
+        successAlert.addAction(okAction)
+        
         present(successAlert, animated: true, completion: nil)
     }
     
     func showErrorAlert() {
+        let successAlert = UIAlertController(title: "Ошибка", message: "Не удалось сохранить данные", preferredStyle: .alert)
         
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        
+        let repeatAction = UIAlertAction(title: "Повторить", style: .destructive) {
+            (alert: UIAlertAction!) -> Void in
+            self.showErrorAlert()
+        }
+        
+        successAlert.addAction(okAction)
+        successAlert.addAction(repeatAction)
+        
+        present(successAlert, animated: true, completion: nil)
     }
     
     // - MARK: UITextFieldDelegate Methods
@@ -115,14 +144,28 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     
     // - MARK: ViewControllerButtonActions
     @IBAction func GCDsaveButtonAction(_ sender: UIButton) {
-        let title = sender.titleLabel?.text
-        sender.setTitle("", for: .normal)
-        loadingIndicator.center = sender.center
-        loadingIndicator.startAnimating()
-        showSuccessAlert()
-        loadingIndicator.stopAnimating()
-        sender.setTitle(title, for: .normal)
+        
         //dismiss(animated: true, completion: nil)
+    }
+    
+    func GCDSaveData() {
+        let title = GCDSaveButtonOutlet.titleLabel?.text
+        GCDSaveButtonOutlet.setTitle("", for: .normal)
+        loadingIndicator.center = GCDSaveButtonOutlet.center
+        loadingIndicator.startAnimating()
+        
+        
+        let dict = [
+        ]
+        GCDDataManager.sharedInstance.save(data: dict) { (error) in
+            if error != nil {
+                showErrorAlert()
+            }
+            else {
+                loadingIndicator.stopAnimating()
+                GCDSaveButtonOutlet.setTitle(title, for: .normal)
+            }
+        }
     }
     
     @IBAction func operationSaveButtonAction(_ sender: UIButton) {
@@ -133,7 +176,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         showErrorAlert()
         loadingIndicator.stopAnimating()
         sender.setTitle(title, for: .normal)
-        dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
     }
     
     @IBAction func colorButtonsAction(_ sender: UIButton) {

@@ -35,7 +35,7 @@ class MessageCell: UITableViewCell, MessageCellConfiguration {
             return _date
         }
         set {
-            _date = newValue 
+            _date = newValue
             
             if let newDate = newValue {
                 if Calendar.current.compare(Date(), to: newDate, toGranularity: .day).rawValue == 0 {

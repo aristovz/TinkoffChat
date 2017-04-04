@@ -3,9 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "ConversationViewController.scrollToLastRow() -&gt; ():ConversationViewController.swift">
-      </ContextState>
-      <ContextState
          contextName = "MessageCell.messageText.setter:MessageCell.swift">
          <PersistentStrings>
             <PersistentString
@@ -14,10 +11,37 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ProfileViewController.operationSaveButtonAction(UIButton) -&gt; ():ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sender">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ConversationViewController.scrollToLastRow() -&gt; ():ConversationViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "GCDDataManager.(loadData(result : (User?) -&gt; ()) -&gt; ()).(closure #1):DataManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(dict)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ConversationViewController.handleKeyboardNotification(Notification) -&gt; ():ConversationViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "bottomConstraint.constant">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ConversationViewController.currentDialog.didset:ConversationViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tableView">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -33,18 +57,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ConversationsListViewController.setupData() -&gt; ():ConversationsListViewController.swift">
+         contextName = "static Global.loadCurrentUser() -&gt; User?:Global.swift">
          <PersistentStrings>
             <PersistentString
-               value = "onlineDialogs">
+               value = "print(currentUser.name)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ConversationViewController.currentDialog.didset:ConversationViewController.swift">
+         contextName = "ConversationsListViewController.setupData() -&gt; ():ConversationsListViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "tableView">
+               value = "onlineDialogs">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
