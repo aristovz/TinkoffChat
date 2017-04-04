@@ -38,6 +38,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "GCDDataManager.(save(data : [String : AnyObject], result : (SavingError?) -&gt; ()) -&gt; ()).(closure #1):DataManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(dict[key]) == nil">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ConversationViewController.currentDialog.didset:ConversationViewController.swift">
          <PersistentStrings>
             <PersistentString

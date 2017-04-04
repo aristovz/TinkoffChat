@@ -27,6 +27,18 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     
     let imagePicker = UIImagePickerController()
     
+    var savingDictionary: [String: AnyObject] {
+        get {
+            var dictionary = [String: AnyObject]()
+            dictionary["name"] = loginTextField.text as AnyObject
+            dictionary["about"] = userInfoTextView.text as AnyObject
+            dictionary["image"] = UIImagePNGRepresentation(avatarImageView.image!)! as AnyObject
+            dictionary["color"] = colorTextLabel.textColor.toHexString() as AnyObject
+            
+            return dictionary
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -119,20 +131,68 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         present(successAlert, animated: true, completion: nil)
     }
     
-    func showErrorAlert() {
-        let successAlert = UIAlertController(title: "Ошибка", message: "Не удалось сохранить данные", preferredStyle: .alert)
+    func showErrorAlert(savingFunc: @escaping () -> ()) {
+        let errorAlert = UIAlertController(title: "Ошибка", message: "Не удалось сохранить данные", preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "OK", style: .default)
         
         let repeatAction = UIAlertAction(title: "Повторить", style: .destructive) {
             (alert: UIAlertAction!) -> Void in
-            self.showErrorAlert()
+            savingFunc()
         }
         
-        successAlert.addAction(okAction)
-        successAlert.addAction(repeatAction)
+        errorAlert.addAction(okAction)
+        errorAlert.addAction(repeatAction)
         
-        present(successAlert, animated: true, completion: nil)
+        present(errorAlert, animated: true, completion: nil)
+    }
+    
+    func GCDSaveData() {
+        let title = GCDSaveButtonOutlet.titleLabel?.text
+        GCDSaveButtonOutlet.setTitle("", for: .normal)
+        OperationSaveButtonOutlet.isEnabled = false
+        GCDSaveButtonOutlet.isEnabled = false
+        loadingIndicator.center = GCDSaveButtonOutlet.center
+        loadingIndicator.startAnimating()
+        
+        GCDDataManager.sharedInstance.save(data: savingDictionary) { (error) in
+            DispatchQueue.main.async {
+                self.GCDSaveButtonOutlet.isEnabled = true
+                self.OperationSaveButtonOutlet.isEnabled = true
+                self.loadingIndicator.stopAnimating()
+                self.GCDSaveButtonOutlet.setTitle(title, for: .normal)
+                
+                if error != nil {
+                    self.showErrorAlert(savingFunc: self.GCDSaveData)
+                }
+                else {
+                    self.showSuccessAlert()
+                }
+            }
+        }
+    }
+    
+    func OperationSaveData() {
+        let title = OperationSaveButtonOutlet.titleLabel?.text
+        OperationSaveButtonOutlet.setTitle("", for: .normal)
+        GCDSaveButtonOutlet.isEnabled = false
+        OperationSaveButtonOutlet.isEnabled = false
+        loadingIndicator.center = OperationSaveButtonOutlet.center
+        loadingIndicator.startAnimating()
+        
+//        OperationDataManager.sharedInstance.save(data: savingDictionary) { (error) in
+//            self.GCDSaveButtonOutlet.isEnabled = true
+//            self.OperationSaveButtonOutlet.isEnabled = true
+//            
+//            if error != nil {
+//                self.showErrorAlert(savingFunc: self.OperationSaveData)
+//            }
+//            else {
+//                self.showSuccessAlert()
+//                self.loadingIndicator.stopAnimating()
+//                self.OperationSaveButtonOutlet.setTitle(title, for: .normal)
+//            }
+//        }
     }
     
     // - MARK: UITextFieldDelegate Methods
@@ -144,40 +204,18 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     
     // - MARK: ViewControllerButtonActions
     @IBAction func GCDsaveButtonAction(_ sender: UIButton) {
-        
+        GCDSaveData()
         //dismiss(animated: true, completion: nil)
     }
     
-    func GCDSaveData() {
-        let title = GCDSaveButtonOutlet.titleLabel?.text
-        GCDSaveButtonOutlet.setTitle("", for: .normal)
-        loadingIndicator.center = GCDSaveButtonOutlet.center
-        loadingIndicator.startAnimating()
-        
-//        GCDDataManager.sharedInstance.save(data: dict) { (error) in
-//            if error != nil {
-//                showErrorAlert()
-//            }
-//            else {
-//                loadingIndicator.stopAnimating()
-//                GCDSaveButtonOutlet.setTitle(title, for: .normal)
-//            }
-//        }
-    }
-    
     @IBAction func operationSaveButtonAction(_ sender: UIButton) {
-        let title = sender.titleLabel?.text
-        sender.setTitle("", for: .normal)
-        loadingIndicator.center = sender.center
-        loadingIndicator.startAnimating()
-        showErrorAlert()
-        loadingIndicator.stopAnimating()
-        sender.setTitle(title, for: .normal)
+        OperationSaveData()
         //dismiss(animated: true, completion: nil)
     }
     
     @IBAction func colorButtonsAction(_ sender: UIButton) {
-        colorTextLabel.textColor = sender.backgroundColor
+        print(sender.backgroundColor!.toHexString())
+        colorTextLabel.textColor = UIColor(hexString: sender.backgroundColor!.toHexString())
     }
     
     @IBAction func cancelButtonAction(_ sender: UIButton) {
