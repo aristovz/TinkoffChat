@@ -293,6 +293,8 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
+                        <outlet property="GCDSaveButtonOutlet" destination="OJO-lA-Te2" id="Rrd-U3-5qS"/>
+                        <outlet property="OperationSaveButtonOutlet" destination="TZe-r7-kHV" id="FZu-K9-G4X"/>
                         <outlet property="avatarImageView" destination="hso-em-lf4" id="tcs-Ye-vCt"/>
                         <outlet property="colorTextLabel" destination="qa5-Fw-cDi" id="Du6-q1-1xB"/>
                         <outlet property="loadingIndicator" destination="OVt-7I-mQW" id="jtw-yj-bML"/>

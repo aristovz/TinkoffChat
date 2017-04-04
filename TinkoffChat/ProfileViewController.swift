@@ -154,18 +154,15 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         loadingIndicator.center = GCDSaveButtonOutlet.center
         loadingIndicator.startAnimating()
         
-        
-        let dict = [
-        ]
-        GCDDataManager.sharedInstance.save(data: dict) { (error) in
-            if error != nil {
-                showErrorAlert()
-            }
-            else {
-                loadingIndicator.stopAnimating()
-                GCDSaveButtonOutlet.setTitle(title, for: .normal)
-            }
-        }
+//        GCDDataManager.sharedInstance.save(data: dict) { (error) in
+//            if error != nil {
+//                showErrorAlert()
+//            }
+//            else {
+//                loadingIndicator.stopAnimating()
+//                GCDSaveButtonOutlet.setTitle(title, for: .normal)
+//            }
+//        }
     }
     
     @IBAction func operationSaveButtonAction(_ sender: UIButton) {
