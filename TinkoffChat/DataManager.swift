@@ -90,7 +90,7 @@ class GCDDataManager {
                 currentUser.name = dict["name"] as! String
                 currentUser.about = dict["about"] as! String
                 currentUser.color = UIColor(hexString: dict["color"] as! String)
-                print(dict["color"])
+                
                 if let image = UIImage(data: dict["image"] as! Data) {
                     currentUser.image = image
                 }
@@ -112,8 +112,6 @@ class GCDDataManager {
     func save(data: [String: AnyObject], result: @escaping (SavingError?) -> ()) {
         let globalQueue = DispatchQueue.global(qos: .userInitiated)
         globalQueue.async {
-            print(data["color"])
-            
             if let plist = Plist(name: "UserInfo") {
                 let dict = plist.getMutablePlistFile()!
                 
@@ -137,14 +135,105 @@ class GCDDataManager {
     }
 }
 
-class OperationDataManager: Operation {
+class OperationDataManager {
     static let sharedInstance = OperationDataManager()
     
-    func loadData() {
+    func loadData(result: @escaping (User?) -> ()) {
+        let queue = OperationQueue()
+        queue.name = "ru.aristovz.loadOperation"
         
+        let saveOperation = LoadOperation() { error in
+            result(error)
+        }
+        
+        queue.addOperation(saveOperation)
     }
     
-    func saveData(data: [String : Any]) {
+    func save(data: [String: AnyObject], result: @escaping (SavingError?) -> ()) {
+        let queue = OperationQueue()
+        queue.name = "ru.aristovz.saveOperation"
         
+        let saveOperation = SaveOperation(data: data) { error in
+            result(error)
+        }
+        
+        queue.addOperation(saveOperation)
+    }
+}
+
+class SaveOperation: Operation {
+    
+    var data: [String: AnyObject]
+    let error: (SavingError?) -> ()
+    
+    init(data: [String: AnyObject], error: @escaping (SavingError?) -> ()) {
+        self.error = error
+        self.data = data
+    }
+    
+    override func main() {
+        if self.isCancelled {
+            return
+        }
+        
+        if let plist = Plist(name: "UserInfo") {
+            let dict = plist.getMutablePlistFile()!
+            
+            for key in data.keys {
+                if dict[key] != nil {
+                    dict[key] = data[key]
+                    plist.addValuesToPlistFile(dictionary: dict)
+                }
+                else {
+                    error(.BadParameters)
+                    return
+                }
+            }
+        }
+        else {
+            error(.ErrorLoadPlist)
+        }
+        
+        error(nil)
+    }
+}
+
+class LoadOperation: Operation {
+    
+    var user: (User?) -> ()
+    
+    init(user: @escaping (User?) -> ()) {
+        self.user = user
+    }
+    
+    override func main() {
+        if self.isCancelled {
+            return
+        }
+        
+        if let plist = Plist(name: "UserInfo") {
+            
+            let dict = plist.getMutablePlistFile()!
+            
+            var currentUser = User()
+            currentUser.name = dict["name"] as! String
+            currentUser.about = dict["about"] as! String
+            currentUser.color = UIColor(hexString: dict["color"] as! String)
+            
+            if let image = UIImage(data: dict["image"] as! Data) {
+                currentUser.image = image
+            }
+            else {
+                currentUser.image = #imageLiteral(resourceName: "defaultUser")
+            }
+            
+            OperationQueue.main.addOperation {
+                self.user(currentUser)
+            }
+        }
+        else {
+            print("Error load currentUser")
+            user(nil)
+        }
     }
 }

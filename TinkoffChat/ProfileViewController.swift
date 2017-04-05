@@ -180,19 +180,21 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         loadingIndicator.center = OperationSaveButtonOutlet.center
         loadingIndicator.startAnimating()
         
-//        OperationDataManager.sharedInstance.save(data: savingDictionary) { (error) in
-//            self.GCDSaveButtonOutlet.isEnabled = true
-//            self.OperationSaveButtonOutlet.isEnabled = true
-//            
-//            if error != nil {
-//                self.showErrorAlert(savingFunc: self.OperationSaveData)
-//            }
-//            else {
-//                self.showSuccessAlert()
-//                self.loadingIndicator.stopAnimating()
-//                self.OperationSaveButtonOutlet.setTitle(title, for: .normal)
-//            }
-//        }
+        OperationDataManager.sharedInstance.save(data: savingDictionary) { (error) in
+            OperationQueue.main.addOperation {
+                self.GCDSaveButtonOutlet.isEnabled = true
+                self.OperationSaveButtonOutlet.isEnabled = true
+                self.loadingIndicator.stopAnimating()
+                self.OperationSaveButtonOutlet.setTitle(title, for: .normal)
+                
+                if error != nil {
+                    self.showErrorAlert(savingFunc: self.OperationSaveData)
+                }
+                else {
+                    self.showSuccessAlert()
+                }
+            }
+        }
     }
     
     // - MARK: UITextFieldDelegate Methods
