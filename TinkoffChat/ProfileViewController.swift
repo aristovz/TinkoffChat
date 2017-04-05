@@ -39,6 +39,21 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    var loadingView: UIView {
+        let view = UIView(frame: self.view.frame)
+        
+        view.backgroundColor = UIColor.background
+        view.tag = 1
+        
+        let activity = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        activity.startAnimating()
+        activity.center = view.center
+        
+        view.addSubview(activity)
+        
+        return view
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,14 +66,23 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         avatarImageView.isUserInteractionEnabled = true
         avatarImageView.addGestureRecognizer(tapGestureRecognizer)
         
+        self.view.addSubview(loadingView)
+        self.loadingView.isHidden = true
         GCDDataManager.sharedInstance.loadData { (currentUser) in
             guard let user = currentUser else { return }
+            
+            Global.currentUser = user
             
             self.loginTextField.text = user.name
             self.userInfoTextView.text = user.about
             self.avatarImageView.image = user.image
             self.colorTextLabel.textColor = user.color
+            
+            if let view = self.view.viewWithTag(1) {
+                view.removeFromSuperview()
+            }
         }
+        
     }
     
     override func viewDidLayoutSubviews() {

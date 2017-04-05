@@ -52,6 +52,15 @@ class ConversationsListViewController: UITableViewController {
         refreshControl.addTarget(self, action: #selector(setupData), for: UIControlEvents.valueChanged)
         self.refreshControl = refreshControl
         
+        GCDDataManager.sharedInstance.loadData { (currentUser) in
+            Global.currentUser = currentUser
+            DispatchQueue.main.async {
+                self.avatarImageView.image = Global.currentUser?.image ?? #imageLiteral(resourceName: "defaultUser")
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         self.refreshControl?.beginRefreshingManually()
     }
     

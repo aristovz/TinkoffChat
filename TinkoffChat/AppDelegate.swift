@@ -18,8 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().tintColor = .white
         
-        Global.loadCurrentUser()
-        
         return true
     }
     

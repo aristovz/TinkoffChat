@@ -11,10 +11,6 @@ import UIKit
 
 class Global {
     static var currentUser: User?
-    
-    class func loadCurrentUser() {
-        
-    }
 }
 
 struct User {
