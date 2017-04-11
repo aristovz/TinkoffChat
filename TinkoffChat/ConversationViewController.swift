@@ -12,11 +12,18 @@ class ConversationViewController: UIViewController {
     
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
-    var currentDialog: Dialog? {
+    var currentDialog: Peer? {
         didSet {
             navigationItem.title = currentDialog?.name
+        }
+    }
+    
+    var manager : CommunicationManager! {
+        get {
+            return CommunicationManager.shared
         }
     }
     
@@ -47,7 +54,7 @@ class ConversationViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        if currentDialog?.messages?.count == 0 { self.tableView.addSubview(noMessageLabel) }
+        if currentDialog?.messages.count == 0 { self.tableView.addSubview(noMessageLabel) }
         
         tableView.scrollToLastRow()
         
@@ -72,6 +79,26 @@ class ConversationViewController: UIViewController {
             })
         }
     }
+    
+    @IBAction func sendButtonAction(_ sender: UIButton) {
+        if let currentDialogID = currentDialog?.id {
+            manager.sendMessage(string: messageTextField.text ?? "", to: currentDialogID) { (success, error) in
+                guard error == nil else {
+                    print(error.debugDescription)
+                    return
+                }
+                
+                if success {
+                    let message = Message(text: messageTextField.text ?? "", date: Date(), type: .Outgoing)
+                    currentDialog?.messages.append(message)
+                    tableView.reloadData()
+                }
+                else {
+                    print("Error send message")
+                }
+            }
+        }
+    }
 }
 
 extension ConversationViewController: UITableViewDelegate, UITableViewDataSource {
@@ -80,7 +107,8 @@ extension ConversationViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let messagesCount = currentDialog?.messages?.count {
+        if let messagesCount = currentDialog?.messages.count {
+            if messagesCount > 0 { noMessageLabel.removeFromSuperview() }
             return messagesCount
         }
         
@@ -88,7 +116,7 @@ extension ConversationViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let currentMessage = currentDialog?.messages?[indexPath.row] {
+        if let currentMessage = currentDialog?.messages[indexPath.row] {
             let identefier = currentMessage.type == .Incoming ? "incomingCell" : "outgoingCell"
             
             let cell = self.tableView.dequeueReusableCell(withIdentifier: identefier) as! MessageCell

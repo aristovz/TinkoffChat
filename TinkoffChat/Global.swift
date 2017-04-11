@@ -11,6 +11,15 @@ import UIKit
 
 class Global {
     static var currentUser: User?
+    
+    class func loadCurrentUser(comletionHandler: @escaping (() -> ())) {
+        GCDDataManager.sharedInstance.loadData { (currentUser) in
+            Global.currentUser = currentUser
+            DispatchQueue.main.async {
+                comletionHandler()
+            }
+        }
+    }
 }
 
 struct User {

@@ -3,18 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "MessageCell.messageText.setter:MessageCell.swift">
+         contextName = "MultipeerCommunicator.advertiser(MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer : MCPeerID, withContext : Data?, invitationHandler : (Bool, MCSession?) -&gt; ()) -&gt; ():MultipeerCommunicator.swift">
          <PersistentStrings>
             <PersistentString
-               value = "messageLabel">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ProfileViewController.operationSaveButtonAction(UIButton) -&gt; ():ProfileViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "sender">
+               value = "print(peerID.displayName)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -30,18 +22,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ConversationViewController.handleKeyboardNotification(Notification) -&gt; ():ConversationViewController.swift">
+         contextName = "MultipeerCommunicator.invitePeer(userID : String, to : MCSession) -&gt; ():MultipeerCommunicator.swift">
          <PersistentStrings>
             <PersistentString
-               value = "bottomConstraint.constant">
+               value = "sessions">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GCDDataManager.(save(data : [String : AnyObject], result : (SavingError?) -&gt; ()) -&gt; ()).(closure #1):DataManager.swift">
+         contextName = "ConversationsListViewController.refresh() -&gt; ():ConversationsListViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "print(dict[key]) == nil">
+               value = "manager">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -50,6 +42,22 @@
          <PersistentStrings>
             <PersistentString
                value = "tableView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MultipeerCommunicator.init() -&gt; MultipeerCommunicator:MultipeerCommunicator.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.advertiser.delegate == nil">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MultipeerCommunicator.browser(MCNearbyServiceBrowser, foundPeer : MCPeerID, withDiscoveryInfo : [String : String]?) -&gt; ():MultipeerCommunicator.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.advertiser.delegate == nil">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -65,6 +73,22 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "MessageCell.messageText.setter:MessageCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "messageLabel">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CommunicationManager.didFoundUser(userID : String, userName : String?) -&gt; ():CommunicationManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "userID">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "static Global.loadCurrentUser() -&gt; User?:Global.swift">
          <PersistentStrings>
             <PersistentString
@@ -73,10 +97,61 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ProfileViewController.operationSaveButtonAction(UIButton) -&gt; ():ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sender">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GCDDataManager.(save(data : [String : AnyObject], result : (SavingError?) -&gt; ()) -&gt; ()).(closure #1):DataManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(dict[key]) == nil">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ConversationsListViewController.setupData() -&gt; ():ConversationsListViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "onlineDialogs">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MultipeerCommunicator.sendMessage(string : String, to : String, completionHandler : (Bool, Error?) -&gt; ()) -&gt; ():MultipeerCommunicator.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "session">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CommunicationManager.invitePeer(userID : String) -&gt; ():CommunicationManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "communicator.session">
+            </PersistentString>
+            <PersistentString
+               value = "print(userID)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ConversationViewController.handleKeyboardNotification(Notification) -&gt; ():ConversationViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "bottomConstraint.constant">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ConversationsListViewController.tableView(UITableView, didSelectRowAt : IndexPath) -&gt; ():ConversationsListViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "manager.communicator.advertiser.delegate == nil">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

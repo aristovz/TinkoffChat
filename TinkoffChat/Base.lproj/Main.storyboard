@@ -344,6 +344,9 @@
                                         <state key="normal" title="Send">
                                             <color key="titleColor" red="1" green="0.86666666670000003" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="sendButtonAction:" destination="yeI-fj-rrg" eventType="touchUpInside" id="i2n-hi-oeJ"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyy-iD-kU7">
                                         <rect key="frame" x="12" y="9.5" width="25" height="25"/>
@@ -386,6 +389,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="bottomConstraint" destination="aVe-sy-gIR" id="IEs-gT-zqw"/>
+                        <outlet property="messageTextField" destination="dWE-6Q-iao" id="uNo-NM-Mlm"/>
                         <outlet property="tableView" destination="5Qv-mP-uxv" id="n3m-cJ-HSF"/>
                     </connections>
                 </viewController>
