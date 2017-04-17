@@ -9,17 +9,30 @@
 import Foundation
 import MultipeerConnectivity
 
+var manager: CommunicationManager!
+
 struct Peer {
-    var id: String?
+    var peerID: MCPeerID?
     var name: String?
     var messages = [Message]()
     var online: Bool
     var hasUnreadMessage: Bool
+    var session: MCSession?
+    
+    var id: String? {
+        get {
+            return self.peerID?.displayName
+        }
+    }
     
     var lastMessage: Message? {
         get {
             return messages.max { mes1, mes2 in mes1.date < mes2.date }
         }
+    }
+    
+    mutating func setSession(session: MCSession) {
+        self.session = session
     }
 }
 
@@ -35,33 +48,27 @@ struct Message {
 }
 
 @objc protocol CommunicationManagerDelegate: class {
-    func didFoundUser(userID: String, userName: String?)
-    func didLostUser(userID: String)
     func didReceiveMessage(text: String, fromUser: String, toUser: String)
     
+    @objc optional func didFoundUser(userID: String, userName: String?)
+    @objc optional func didLostUser(userID: String)
     @objc optional func failedToStartBrowsingForUsers(error: Error)
     @objc optional func failedToStartAdvertising(error: Error)
 }
 
 class CommunicationManager: NSObject {
-    static let shared = CommunicationManager()
-    
     var foundedPeers = [Peer]()
     
     weak var delegate: CommunicationManagerDelegate?
     
-    var isAdvertisingStarded = false
+    var communicator: MultipeerCommunicator!
     
-    var communicator: MultipeerCommunicator {
-        get {
-            return MultipeerCommunicator.shared
-        }
-    }
-    
-    override init() {
+    init(delegate: CommunicationManagerDelegate) {
         super.init()
         
-        communicator.delegate = self
+        self.delegate = delegate
+        
+        communicator = MultipeerCommunicator(delegate: self)
     }
     
     func start() {
@@ -75,17 +82,35 @@ class CommunicationManager: NSObject {
     }
     
     func sendMessage(string: String, to userID: String, completionHandler: ((Bool, Error?) -> ())) {
+        for k in 0..<manager.foundedPeers.count {
+            if manager.foundedPeers[k].id == userID {
+                let message = Message(text: string, date: Date(), type: .Outgoing)
+                
+                manager.foundedPeers[k].messages.append(message)
+                manager.foundedPeers[k].hasUnreadMessage = true
+            }
+        }
+        
         communicator.sendMessage(string: string, to: userID, completionHandler: completionHandler)
     }
     
-    func invitePeer(userID: String) {
-        print(userID)
+    func getPeer(userID: String) -> Peer? {
+        for k in 0..<manager.foundedPeers.count {
+            if manager.foundedPeers[k].id == userID {
+                return manager.foundedPeers[k]
+            }
+        }
         
-        let session = MCSession(peer: communicator.peer)
-        
-        session.delegate = self
-        
-        communicator.invitePeer(userID: userID, to: session)
+        return nil
+    }
+    
+    func invitePeer(peer: MCPeerID) {
+        for k in 0..<manager.foundedPeers.count {
+            if manager.foundedPeers[k].id == peer.displayName {
+                manager.foundedPeers[k].session = communicator.invitePeer(peer: peer)
+                return
+            }
+        }
     }
 }
 
@@ -98,15 +123,15 @@ extension CommunicationManager: CommunicatorDelegate {
         delegate?.failedToStartAdvertising?(error: error)
     }
     
-    func didFoundUser(userID: String, userName: String?) {
-        guard foundedPeers.first(where: {$0.id == userID}) == nil else {
+    func didFoundUser(peer: MCPeerID, userName: String?) {
+        guard foundedPeers.first(where: {$0.id == peer.displayName}) == nil else {
             return
         }
         
-        let peer = Peer(id: userID, name: userName, messages: [], online: true, hasUnreadMessage: false)
+        let peer = Peer(peerID: peer, name: userName, messages: [], online: true, hasUnreadMessage: false, session: nil)
         foundedPeers.append(peer)
         
-        delegate?.didFoundUser(userID: userID, userName: userName)
+        delegate?.didFoundUser?(userID: peer.id!, userName: userName)
     }
     
     func didLostUser(userID: String) {
@@ -114,37 +139,19 @@ extension CommunicationManager: CommunicatorDelegate {
             foundedPeers.remove(at: index)
         }
         
-        delegate?.didLostUser(userID: userID)
+        delegate?.didLostUser?(userID: userID)
     }
     
     func didReceiveMessage(text: String, fromUser: String, toUser: String) {
+        for k in 0..<manager.foundedPeers.count {
+            if manager.foundedPeers[k].id == fromUser {
+                let message = Message(text: text, date: Date(), type: .Incoming)
+                
+                manager.foundedPeers[k].messages.append(message)
+                manager.foundedPeers[k].hasUnreadMessage = true
+            }
+        }
+        
         delegate?.didReceiveMessage(text: text, fromUser: fromUser, toUser: toUser)
     }
-}
-
-extension CommunicationManager: MCSessionDelegate {
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        switch state {
-        case MCSessionState.connected:
-            print("Connected to session: \(session)")
-            //delegate?.connectedWithPeer(peerID)
-            
-        case MCSessionState.connecting:
-            print("Connecting to session: \(session)")
-            
-        default:
-            print("Did not connect to session: \(session)")
-        }
-    }
-    
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        let dictionary: [String: AnyObject] = ["data": data as AnyObject, "fromPeer": peerID]
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "receivedMPCDataNotification"), object: dictionary)
-    }
-    
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) { }
-    
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) { }
-    
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) { }
 }

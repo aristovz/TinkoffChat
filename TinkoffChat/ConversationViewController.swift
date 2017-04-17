@@ -15,15 +15,11 @@ class ConversationViewController: UIViewController {
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var sendButtonOutlet: UIButton!
+    
     var currentDialog: Peer? {
         didSet {
             navigationItem.title = currentDialog?.name
-        }
-    }
-    
-    var manager : CommunicationManager! {
-        get {
-            return CommunicationManager.shared
         }
     }
     
@@ -40,6 +36,14 @@ class ConversationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        manager.delegate = self
+        
+        if let currentPeer = currentDialog {
+            if currentPeer.session == nil {
+                manager.invitePeer(peer: currentPeer.peerID!)
+           }
+        }
         
         self.navigationController?.navigationBar.topItem?.backBarButtonItem?.title = ""
         
@@ -81,16 +85,15 @@ class ConversationViewController: UIViewController {
     }
     
     @IBAction func sendButtonAction(_ sender: UIButton) {
-        if let currentDialogID = currentDialog?.id {
-            manager.sendMessage(string: messageTextField.text ?? "", to: currentDialogID) { (success, error) in
+       if let currentPeer = currentDialog {
+            manager.sendMessage(string: messageTextField.text ?? "", to: currentPeer.id!) { (success, error) in
+                
                 guard error == nil else {
                     print(error.debugDescription)
                     return
                 }
                 
                 if success {
-                    let message = Message(text: messageTextField.text ?? "", date: Date(), type: .Outgoing)
-                    currentDialog?.messages.append(message)
                     tableView.reloadData()
                 }
                 else {
@@ -98,6 +101,8 @@ class ConversationViewController: UIViewController {
                 }
             }
         }
+        
+        messageTextField.text = ""
     }
 }
 
@@ -107,28 +112,46 @@ extension ConversationViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let messagesCount = currentDialog?.messages.count {
-            if messagesCount > 0 { noMessageLabel.removeFromSuperview() }
-            return messagesCount
+        if manager != nil, let peer = manager.getPeer(userID: currentDialog!.id!) {
+            return peer.messages.count
         }
         
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let currentMessage = currentDialog?.messages[indexPath.row] {
+        if let currentMessage = manager.getPeer(userID: currentDialog!.id!)?.messages[indexPath.row] {
             let identefier = currentMessage.type == .Incoming ? "incomingCell" : "outgoingCell"
             
             let cell = self.tableView.dequeueReusableCell(withIdentifier: identefier) as! MessageCell
             cell.messageText = currentMessage.text
             cell.date = currentMessage.date
-            
             return cell
         }
         else {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "incomingCell") as! MessageCell
             cell.messageText = "Error"
             return cell
+        }
+    }
+}
+
+extension ConversationViewController: CommunicationManagerDelegate {
+    func didReceiveMessage(text: String, fromUser: String, toUser: String) {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func didFoundUser(userID: String, userName: String?) {
+        
+    }
+    
+    func didLostUser(userID: String) {
+        if userID == currentDialog!.id {
+            messageTextField.placeholder = "Пользователь вышел из сети!"
+            sendButtonOutlet.isEnabled = false
+            sendButtonOutlet.setTitleColor(.darkGray, for: .normal)
         }
     }
 }
