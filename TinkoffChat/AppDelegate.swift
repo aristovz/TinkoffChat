@@ -13,10 +13,19 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    let rootAssembly = RootAssembly()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         UINavigationBar.appearance().tintColor = .white
+        
+        Global.loadCurrentUser {
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            let controller = self.rootAssembly.conversationListModel.conversationListViewCotnroller()
+            self.window?.rootViewController = controller
+            self.window?.makeKeyAndVisible()
+        }
         
         return true
     }

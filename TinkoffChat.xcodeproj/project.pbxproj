@@ -19,8 +19,15 @@
 		2F7F662D1E8574AC00CBBDDF /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F662C1E8574AC00CBBDDF /* ConversationsListViewController.swift */; };
 		2F7F66311E8585EB00CBBDDF /* DialogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F662F1E8585EB00CBBDDF /* DialogCell.swift */; };
 		2F7F66321E8585EB00CBBDDF /* DialogCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7F66301E8585EB00CBBDDF /* DialogCell.xib */; };
+		2F83F81A1EACC0BA0089CF05 /* ConversationsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F83F8191EACC0BA0089CF05 /* ConversationsListModel.swift */; };
+		2FACF8F21EAD2C7600BD8340 /* RootAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FACF8F11EAD2C7600BD8340 /* RootAssembly.swift */; };
+		2FACF8F41EAD2CB200BD8340 /* ConversationListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FACF8F31EAD2CB200BD8340 /* ConversationListAssembly.swift */; };
+		2FACF8F61EAD2E6C00BD8340 /* ConversationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FACF8F51EAD2E6C00BD8340 /* ConversationAssembly.swift */; };
 		2FB59C3F1E9A3F23004BA2DB /* MultipeerCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB59C3E1E9A3F23004BA2DB /* MultipeerCommunicator.swift */; };
 		2FB59C411E9A52DF004BA2DB /* CommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB59C401E9A52DF004BA2DB /* CommunicationManager.swift */; };
+		2FB8E5CD1EACC4110041BA1E /* ConversationsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB8E5CC1EACC4110041BA1E /* ConversationsListService.swift */; };
+		2FB8E5D21EAD07230041BA1E /* ConversationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB8E5D11EAD07230041BA1E /* ConversationService.swift */; };
+		2FB8E5D41EAD234D0041BA1E /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB8E5D31EAD234D0041BA1E /* ConversationModel.swift */; };
 		2FCAD1461E6D842B009E3D08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCAD1451E6D842B009E3D08 /* AppDelegate.swift */; };
 		2FCAD1481E6D842B009E3D08 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCAD1471E6D842B009E3D08 /* ProfileViewController.swift */; };
 		2FCAD14B1E6D842B009E3D08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCAD1491E6D842B009E3D08 /* Main.storyboard */; };
@@ -53,8 +60,15 @@
 		2F7F662C1E8574AC00CBBDDF /* ConversationsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		2F7F662F1E8585EB00CBBDDF /* DialogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogCell.swift; sourceTree = "<group>"; };
 		2F7F66301E8585EB00CBBDDF /* DialogCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DialogCell.xib; sourceTree = "<group>"; };
+		2F83F8191EACC0BA0089CF05 /* ConversationsListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListModel.swift; sourceTree = "<group>"; };
+		2FACF8F11EAD2C7600BD8340 /* RootAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
+		2FACF8F31EAD2CB200BD8340 /* ConversationListAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationListAssembly.swift; sourceTree = "<group>"; };
+		2FACF8F51EAD2E6C00BD8340 /* ConversationAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationAssembly.swift; sourceTree = "<group>"; };
 		2FB59C3E1E9A3F23004BA2DB /* MultipeerCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerCommunicator.swift; sourceTree = "<group>"; };
 		2FB59C401E9A52DF004BA2DB /* CommunicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicationManager.swift; sourceTree = "<group>"; };
+		2FB8E5CC1EACC4110041BA1E /* ConversationsListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListService.swift; sourceTree = "<group>"; };
+		2FB8E5D11EAD07230041BA1E /* ConversationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationService.swift; sourceTree = "<group>"; };
+		2FB8E5D31EAD234D0041BA1E /* ConversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		2FCAD1421E6D842B009E3D08 /* TinkoffChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCAD1451E6D842B009E3D08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FCAD1471E6D842B009E3D08 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +123,8 @@
 			children = (
 				2F7F662E1E8585CB00CBBDDF /* DialogCell */,
 				2F7F662C1E8574AC00CBBDDF /* ConversationsListViewController.swift */,
+				2F83F8191EACC0BA0089CF05 /* ConversationsListModel.swift */,
+				2FACF8F31EAD2CB200BD8340 /* ConversationListAssembly.swift */,
 			);
 			name = ConversationListViewController;
 			sourceTree = "<group>";
@@ -128,6 +144,8 @@
 			children = (
 				2F3E2F7A1E8AE24B00DF02E8 /* MessageCells */,
 				2F3E2F771E8ADD8300DF02E8 /* ConversationViewController.swift */,
+				2FB8E5D31EAD234D0041BA1E /* ConversationModel.swift */,
+				2FACF8F51EAD2E6C00BD8340 /* ConversationAssembly.swift */,
 			);
 			name = ConversationViewController;
 			sourceTree = "<group>";
@@ -141,14 +159,55 @@
 			name = DialogCell;
 			sourceTree = "<group>";
 		};
+		2F83F8161EACC0210089CF05 /* PresentationLayer */ = {
+			isa = PBXGroup;
+			children = (
+				2F83F8171EACC0330089CF05 /* Modules */,
+			);
+			name = PresentationLayer;
+			sourceTree = "<group>";
+		};
+		2F83F8171EACC0330089CF05 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				2F83F8181EACC0460089CF05 /* ViewControllers */,
+			);
+			name = Modules;
+			sourceTree = "<group>";
+		};
+		2F83F8181EACC0460089CF05 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2F3E2F7B1E8AE25700DF02E8 /* ConversationViewController */,
+				2F3E2F791E8ADEB200DF02E8 /* ConversationListViewController */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		2FB59C3D1E9A3F09004BA2DB /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				2F3EEF7E1E942F9400B95FC2 /* DataManager.swift */,
-				2FB59C3E1E9A3F23004BA2DB /* MultipeerCommunicator.swift */,
-				2FB59C401E9A52DF004BA2DB /* CommunicationManager.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		2FB8E5CB1EACC3F30041BA1E /* ServiceLayer */ = {
+			isa = PBXGroup;
+			children = (
+				2FB8E5CC1EACC4110041BA1E /* ConversationsListService.swift */,
+				2FB8E5D11EAD07230041BA1E /* ConversationService.swift */,
+			);
+			name = ServiceLayer;
+			sourceTree = "<group>";
+		};
+		2FB8E5CE1EACC4930041BA1E /* CoreLayer */ = {
+			isa = PBXGroup;
+			children = (
+				2FB59C401E9A52DF004BA2DB /* CommunicationManager.swift */,
+				2FB59C3E1E9A3F23004BA2DB /* MultipeerCommunicator.swift */,
+			);
+			name = CoreLayer;
 			sourceTree = "<group>";
 		};
 		2FCAD1391E6D842B009E3D08 = {
@@ -173,12 +232,14 @@
 		2FCAD1441E6D842B009E3D08 /* TinkoffChat */ = {
 			isa = PBXGroup;
 			children = (
+				2F83F8161EACC0210089CF05 /* PresentationLayer */,
+				2FB8E5CB1EACC3F30041BA1E /* ServiceLayer */,
+				2FB8E5CE1EACC4930041BA1E /* CoreLayer */,
 				2FB59C3D1E9A3F09004BA2DB /* Model */,
 				2F277AC81E7CA29300ED00B8 /* Support */,
-				2F3E2F7B1E8AE25700DF02E8 /* ConversationViewController */,
-				2F3E2F791E8ADEB200DF02E8 /* ConversationListViewController */,
 				2FCAD1471E6D842B009E3D08 /* ProfileViewController.swift */,
 				2FCAD1451E6D842B009E3D08 /* AppDelegate.swift */,
+				2FACF8F11EAD2C7600BD8340 /* RootAssembly.swift */,
 				2FCAD1491E6D842B009E3D08 /* Main.storyboard */,
 				2FCAD1511E6D842B009E3D08 /* LaunchScreen.storyboard */,
 				2FCAD14F1E6D842B009E3D08 /* Assets.xcassets */,
@@ -307,18 +368,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F83F81A1EACC0BA0089CF05 /* ConversationsListModel.swift in Sources */,
 				2F3EEF7F1E942F9400B95FC2 /* DataManager.swift in Sources */,
+				2FB8E5D41EAD234D0041BA1E /* ConversationModel.swift in Sources */,
+				2FB8E5CD1EACC4110041BA1E /* ConversationsListService.swift in Sources */,
 				2F3E2F781E8ADD8300DF02E8 /* ConversationViewController.swift in Sources */,
 				2FCAD1481E6D842B009E3D08 /* ProfileViewController.swift in Sources */,
 				2F7F662D1E8574AC00CBBDDF /* ConversationsListViewController.swift in Sources */,
 				2FCAD1461E6D842B009E3D08 /* AppDelegate.swift in Sources */,
+				2FACF8F61EAD2E6C00BD8340 /* ConversationAssembly.swift in Sources */,
 				2FCAD14E1E6D842B009E3D08 /* TinkoffChat.xcdatamodeld in Sources */,
 				2FB59C3F1E9A3F23004BA2DB /* MultipeerCommunicator.swift in Sources */,
 				2F3E2F7E1E8AE2AE00DF02E8 /* MessageCell.swift in Sources */,
 				2F277ACA1E7CA2AA00ED00B8 /* Extensions.swift in Sources */,
+				2FACF8F41EAD2CB200BD8340 /* ConversationListAssembly.swift in Sources */,
 				2F7F66311E8585EB00CBBDDF /* DialogCell.swift in Sources */,
 				2FB59C411E9A52DF004BA2DB /* CommunicationManager.swift in Sources */,
 				2F4A5C651E92F9AE00351332 /* Global.swift in Sources */,
+				2FACF8F21EAD2C7600BD8340 /* RootAssembly.swift in Sources */,
+				2FB8E5D21EAD07230041BA1E /* ConversationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

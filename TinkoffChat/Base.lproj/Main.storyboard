@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hBR-9C-GTp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -16,7 +16,7 @@
         <!--Tinkoff Chat-->
         <scene sceneID="hDa-e7-fAJ">
             <objects>
-                <tableViewController id="Fnc-fD-0P5" customClass="ConversationsListViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="conversationListViewCotnroller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Fnc-fD-0P5" customClass="ConversationsListViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="65" sectionHeaderHeight="18" sectionFooterHeight="18" id="lun-GH-qxl">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,7 +30,7 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="DtY-41-5nn"/>
                         <barButtonItem key="rightBarButtonItem" style="done" id="1Mr-tR-1yn">
                             <view key="customView" contentMode="scaleToFill" id="UEr-fS-LF7">
-                                <rect key="frame" x="364" y="7" width="30" height="30"/>
+                                <rect key="frame" x="329" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultUser" translatesAutoresizingMaskIntoConstraints="NO" id="V4T-cK-rOH">
@@ -47,7 +47,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
-                        <outlet property="avatarImageView" destination="V4T-cK-rOH" id="iS6-7X-Z1x"/>
+                        <outlet property="avatarImageView" destination="V4T-cK-rOH" id="XN3-pG-17G"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GrQ-uK-8Pg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -57,7 +57,7 @@
         <!--Navigation Controller-->
         <scene sceneID="ZuH-Ey-bQo">
             <objects>
-                <navigationController id="hBR-9C-GTp" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="startVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hBR-9C-GTp" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="sHK-ok-etH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -313,7 +313,7 @@
         <!--Conversation View Controller-->
         <scene sceneID="Pud-vA-4El">
             <objects>
-                <viewController storyboardIdentifier="ConversationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yeI-fj-rrg" customClass="ConversationViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="conversationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yeI-fj-rrg" customClass="ConversationViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y6x-Ss-n6n"/>
                         <viewControllerLayoutGuide type="bottom" id="Odt-c0-Vdx"/>

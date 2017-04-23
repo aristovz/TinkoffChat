@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversationViewController: UIViewController {
+class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
 
@@ -16,12 +16,6 @@ class ConversationViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var sendButtonOutlet: UIButton!
-    
-    var currentDialog: Peer? {
-        didSet {
-            navigationItem.title = currentDialog?.name
-        }
-    }
     
     let noMessageLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
@@ -34,16 +28,16 @@ class ConversationViewController: UIViewController {
         return label
     }()
     
+    var model: IConversationModel? {
+        didSet {
+            navigationItem.title = model?.currentPeer.name
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        manager.delegate = self
-        
-        if let currentPeer = currentDialog {
-            if currentPeer.session == nil {
-                manager.invitePeer(peer: currentPeer.peerID!)
-           }
-        }
+        model?.delegate = self
         
         self.navigationController?.navigationBar.topItem?.backBarButtonItem?.title = ""
         
@@ -58,7 +52,7 @@ class ConversationViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        if currentDialog?.messages.count == 0 { self.tableView.addSubview(noMessageLabel) }
+        if model?.currentPeer.messages.count == 0 { self.tableView.addSubview(noMessageLabel) }
         
         tableView.scrollToLastRow()
         
@@ -85,73 +79,42 @@ class ConversationViewController: UIViewController {
     }
     
     @IBAction func sendButtonAction(_ sender: UIButton) {
-       if let currentPeer = currentDialog {
-            manager.sendMessage(string: messageTextField.text ?? "", to: currentPeer.id!) { (success, error) in
-                
-                guard error == nil else {
-                    print(error.debugDescription)
-                    return
-                }
-                
-                if success {
-                    tableView.reloadData()
-                }
-                else {
-                    print("Error send message")
-                }
-            }
-        }
-        
+        let message = Message(text: messageTextField.text ?? "", date: Date(), type: .Outgoing)
+        model?.send(message)
         messageTextField.text = ""
     }
-}
-
-extension ConversationViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    // MARK: - UITableView methods
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if manager != nil, let peer = manager.getPeer(userID: currentDialog!.id!) {
-            return peer.messages.count
-        }
-        
-        return 0
+        return model?.currentPeer.messages.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let currentMessage = manager.getPeer(userID: currentDialog!.id!)?.messages[indexPath.row] {
-            let identefier = currentMessage.type == .Incoming ? "incomingCell" : "outgoingCell"
-            
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: identefier) as! MessageCell
-            cell.messageText = currentMessage.text
-            cell.date = currentMessage.date
-            return cell
-        }
-        else {
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: "incomingCell") as! MessageCell
-            cell.messageText = "Error"
-            return cell
-        }
+        let currentMessage = model?.currentPeer.messages[indexPath.row]
+        let identefier = currentMessage?.type == .Incoming ? "incomingCell" : "outgoingCell"
+        
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: identefier) as! MessageCell
+        cell.messageText = currentMessage?.text
+        cell.date = currentMessage?.date
+        return cell
     }
 }
 
-extension ConversationViewController: CommunicationManagerDelegate {
-    func didReceiveMessage(text: String, fromUser: String, toUser: String) {
+extension ConversationViewController: IConversationModelDelegate {
+    func refreshMessages(at message: Message) {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
     
-    func didFoundUser(userID: String, userName: String?) {
-        
-    }
-    
-    func didLostUser(userID: String) {
-        if userID == currentDialog!.id {
-            messageTextField.placeholder = "Пользователь вышел из сети!"
-            sendButtonOutlet.isEnabled = false
-            sendButtonOutlet.setTitleColor(.darkGray, for: .normal)
-        }
+    func didLostConnection() {
+        messageTextField.placeholder = "Пользователь вышел из сети!"
+        sendButtonOutlet.isEnabled = false
+        sendButtonOutlet.setTitleColor(.darkGray, for: .normal)
     }
 }

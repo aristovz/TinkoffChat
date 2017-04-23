@@ -9,26 +9,17 @@
 import UIKit
 import MultipeerConnectivity
 
-class ConversationsListViewController: UITableViewController {
-    
+class ConversationsListViewController: UITableViewController, IConversationListModelDelegate {
+
     @IBOutlet weak var avatarImageView: UIImageView!
     
-    //var onlineDialogs = [Peer]()
-    var offlineDialogs = [Peer]()
+    private var dataSource: [Peer] = []
+    var model: IConversationListModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if Global.currentUser == nil {
-            Global.loadCurrentUser {
-                manager = CommunicationManager(delegate: self)
-                manager.start()
-            }
-        }
-        else {
-            manager = CommunicationManager(delegate: self)
-            manager.start()
-        }
+        model?.delegate = self
         
         tableView.register(UINib(nibName: "DialogCell", bundle: nil) , forCellReuseIdentifier: "dialogCell")
 
@@ -38,9 +29,7 @@ class ConversationsListViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        Global.loadCurrentUser {
-            self.avatarImageView.image = Global.currentUser!.image
-        }
+        self.avatarImageView.image = Global.currentUser!.image
         
         self.tableView.reloadData()
     }
@@ -55,8 +44,21 @@ class ConversationsListViewController: UITableViewController {
         present(vc, animated: true, completion: nil)
     }
     
-    func getCurrentDialog(_ indexPath: IndexPath) -> Peer {
-        return indexPath.section == 0 ? manager.foundedPeers[indexPath.row] : offlineDialogs[indexPath.row]
+    // MARK: - IConversationsModelDelegate methods
+    
+    func refreshConversationsList(list: Set<Peer>) {
+        self.dataSource = Array(list)
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func dialogDidStart(with peer: Peer) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+       let vc = appDelegate.rootAssembly.conversationModel.conversationViewCotnroller(currentPeer: peer)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK: - Table view data source
@@ -71,15 +73,13 @@ class ConversationsListViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard manager != nil else { return 0 }
-        
-        return section == 0 ? manager.foundedPeers.count : offlineDialogs.count
+        return section == 0 ? dataSource.count : 0//offlineDialogs.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "dialogCell", for: indexPath) as! DialogCell
         
-        let currentDialog = getCurrentDialog(indexPath)
+        let currentDialog = dataSource[indexPath.row]//getCurrentDialog(indexPath)
         let lastMessage = currentDialog.lastMessage
         
         cell.name = currentDialog.name
@@ -91,6 +91,7 @@ class ConversationsListViewController: UITableViewController {
         return cell
     }
     
+    
     // MARK: - Table view delegate
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -101,29 +102,6 @@ class ConversationsListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = mainStoryBoard.instantiateViewController(withIdentifier: "ConversationViewController") as! ConversationViewController
-        
-        let currentDialog = getCurrentDialog(indexPath)
-        vc.currentDialog = currentDialog
-
-        navigationController?.pushViewController(vc, animated: true)
-    }
-}
-
-extension ConversationsListViewController: CommunicationManagerDelegate {
-    func didFoundUser(userID: String, userName: String?) {
-        self.tableView.reloadData()
-    }
-    
-    func didLostUser(userID: String) {
-        self.tableView.reloadData()
-    }
-    
-    func didReceiveMessage(text: String, fromUser: String, toUser: String) {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        model?.startDialog(with: dataSource[indexPath.row])
     }
 }
