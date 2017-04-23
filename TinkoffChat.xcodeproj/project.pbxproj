@@ -116,38 +116,42 @@
 				2F4A5C641E92F9AD00351332 /* Global.swift */,
 			);
 			name = Support;
+			path = Support;
 			sourceTree = "<group>";
 		};
 		2F3E2F791E8ADEB200DF02E8 /* ConversationListViewController */ = {
 			isa = PBXGroup;
 			children = (
 				2F7F662E1E8585CB00CBBDDF /* DialogCell */,
-				2F7F662C1E8574AC00CBBDDF /* ConversationsListViewController.swift */,
-				2F83F8191EACC0BA0089CF05 /* ConversationsListModel.swift */,
 				2FACF8F31EAD2CB200BD8340 /* ConversationListAssembly.swift */,
+				2F83F8191EACC0BA0089CF05 /* ConversationsListModel.swift */,
+				2F7F662C1E8574AC00CBBDDF /* ConversationsListViewController.swift */,
 			);
 			name = ConversationListViewController;
+			path = ConversationListViewController;
 			sourceTree = "<group>";
 		};
 		2F3E2F7A1E8AE24B00DF02E8 /* MessageCells */ = {
 			isa = PBXGroup;
 			children = (
-				2F3E2F7C1E8AE2AE00DF02E8 /* MessageCell.swift */,
 				2F3E2F7D1E8AE2AE00DF02E8 /* IncomingMessageCell.xib */,
+				2F3E2F7C1E8AE2AE00DF02E8 /* MessageCell.swift */,
 				2F3E2F811E8AE2D100DF02E8 /* OutgoingMessageCell.xib */,
 			);
 			name = MessageCells;
+			path = MessageCells;
 			sourceTree = "<group>";
 		};
 		2F3E2F7B1E8AE25700DF02E8 /* ConversationViewController */ = {
 			isa = PBXGroup;
 			children = (
 				2F3E2F7A1E8AE24B00DF02E8 /* MessageCells */,
-				2F3E2F771E8ADD8300DF02E8 /* ConversationViewController.swift */,
-				2FB8E5D31EAD234D0041BA1E /* ConversationModel.swift */,
 				2FACF8F51EAD2E6C00BD8340 /* ConversationAssembly.swift */,
+				2FB8E5D31EAD234D0041BA1E /* ConversationModel.swift */,
+				2F3E2F771E8ADD8300DF02E8 /* ConversationViewController.swift */,
 			);
 			name = ConversationViewController;
+			path = ConversationViewController;
 			sourceTree = "<group>";
 		};
 		2F7F662E1E8585CB00CBBDDF /* DialogCell */ = {
@@ -157,6 +161,7 @@
 				2F7F66301E8585EB00CBBDDF /* DialogCell.xib */,
 			);
 			name = DialogCell;
+			path = DialogCell;
 			sourceTree = "<group>";
 		};
 		2F83F8161EACC0210089CF05 /* PresentationLayer */ = {
@@ -165,6 +170,7 @@
 				2F83F8171EACC0330089CF05 /* Modules */,
 			);
 			name = PresentationLayer;
+			path = PresentationLayer;
 			sourceTree = "<group>";
 		};
 		2F83F8171EACC0330089CF05 /* Modules */ = {
@@ -173,15 +179,17 @@
 				2F83F8181EACC0460089CF05 /* ViewControllers */,
 			);
 			name = Modules;
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		2F83F8181EACC0460089CF05 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				2F3E2F7B1E8AE25700DF02E8 /* ConversationViewController */,
 				2F3E2F791E8ADEB200DF02E8 /* ConversationListViewController */,
+				2F3E2F7B1E8AE25700DF02E8 /* ConversationViewController */,
 			);
 			name = ViewControllers;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		2FB59C3D1E9A3F09004BA2DB /* Model */ = {
@@ -190,15 +198,17 @@
 				2F3EEF7E1E942F9400B95FC2 /* DataManager.swift */,
 			);
 			name = Model;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		2FB8E5CB1EACC3F30041BA1E /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
-				2FB8E5CC1EACC4110041BA1E /* ConversationsListService.swift */,
 				2FB8E5D11EAD07230041BA1E /* ConversationService.swift */,
+				2FB8E5CC1EACC4110041BA1E /* ConversationsListService.swift */,
 			);
 			name = ServiceLayer;
+			path = ServiceLayer;
 			sourceTree = "<group>";
 		};
 		2FB8E5CE1EACC4930041BA1E /* CoreLayer */ = {
@@ -208,15 +218,16 @@
 				2FB59C3E1E9A3F23004BA2DB /* MultipeerCommunicator.swift */,
 			);
 			name = CoreLayer;
+			path = CoreLayer;
 			sourceTree = "<group>";
 		};
 		2FCAD1391E6D842B009E3D08 = {
 			isa = PBXGroup;
 			children = (
+				2F2467D51E96CC4C00C1C5B9 /* Frameworks */,
+				2FCAD1431E6D842B009E3D08 /* Products */,
 				2FCAD1441E6D842B009E3D08 /* TinkoffChat */,
 				2FCAD15C1E6D842C009E3D08 /* TinkoffChatTests */,
-				2FCAD1431E6D842B009E3D08 /* Products */,
-				2F2467D51E96CC4C00C1C5B9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -232,20 +243,20 @@
 		2FCAD1441E6D842B009E3D08 /* TinkoffChat */ = {
 			isa = PBXGroup;
 			children = (
-				2F83F8161EACC0210089CF05 /* PresentationLayer */,
-				2FB8E5CB1EACC3F30041BA1E /* ServiceLayer */,
 				2FB8E5CE1EACC4930041BA1E /* CoreLayer */,
 				2FB59C3D1E9A3F09004BA2DB /* Model */,
+				2F83F8161EACC0210089CF05 /* PresentationLayer */,
+				2FB8E5CB1EACC3F30041BA1E /* ServiceLayer */,
 				2F277AC81E7CA29300ED00B8 /* Support */,
-				2FCAD1471E6D842B009E3D08 /* ProfileViewController.swift */,
 				2FCAD1451E6D842B009E3D08 /* AppDelegate.swift */,
-				2FACF8F11EAD2C7600BD8340 /* RootAssembly.swift */,
-				2FCAD1491E6D842B009E3D08 /* Main.storyboard */,
-				2FCAD1511E6D842B009E3D08 /* LaunchScreen.storyboard */,
 				2FCAD14F1E6D842B009E3D08 /* Assets.xcassets */,
 				2FCAD1541E6D842B009E3D08 /* Info.plist */,
-				2F4A5C671E93B99B00351332 /* UserInfo.plist */,
+				2FCAD1511E6D842B009E3D08 /* LaunchScreen.storyboard */,
+				2FCAD1491E6D842B009E3D08 /* Main.storyboard */,
+				2FCAD1471E6D842B009E3D08 /* ProfileViewController.swift */,
+				2FACF8F11EAD2C7600BD8340 /* RootAssembly.swift */,
 				2FCAD14C1E6D842B009E3D08 /* TinkoffChat.xcdatamodeld */,
+				2F4A5C671E93B99B00351332 /* UserInfo.plist */,
 			);
 			path = TinkoffChat;
 			sourceTree = "<group>";
@@ -253,8 +264,8 @@
 		2FCAD15C1E6D842C009E3D08 /* TinkoffChatTests */ = {
 			isa = PBXGroup;
 			children = (
-				2FCAD15D1E6D842C009E3D08 /* TinkoffChatTests.swift */,
 				2FCAD15F1E6D842C009E3D08 /* Info.plist */,
+				2FCAD15D1E6D842C009E3D08 /* TinkoffChatTests.swift */,
 			);
 			path = TinkoffChatTests;
 			sourceTree = "<group>";
@@ -415,6 +426,7 @@
 				2FCAD14A1E6D842B009E3D08 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		2FCAD1511E6D842B009E3D08 /* LaunchScreen.storyboard */ = {
@@ -423,6 +435,7 @@
 				2FCAD1521E6D842B009E3D08 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
